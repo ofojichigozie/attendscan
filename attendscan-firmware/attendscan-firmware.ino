@@ -4,7 +4,7 @@
 #include <WiFiClientSecure.h>
 #include <WebServer.h>
 #include <ESP32QRCodeReader.h>
-#include "config.h"
+#include "attendscan_config.h"
 #include "attendscan_webserver.h"
 
 // ESP32QRCodeReader targets the AI-Thinker module and manages camera init internally.
@@ -264,9 +264,18 @@ void loop() {
   }
 
   String regNumber = String((const char*)qrData.payload);
+
+  static String lastRegNumber = "";
+  if (regNumber == lastRegNumber) {
+    Serial.printf("[QR] duplicate decode of %s ignored\n", regNumber.c_str());
+    return;
+  }
+
   Serial.printf("[QR] decoded reg_number: %s\n", regNumber.c_str());
   setStatus(scanStatus.lastActivityMessage, sizeof(scanStatus.lastActivityMessage), "QR decoded — sending to server...");
 
   blinkLed(LED_BLINK_QR_DETECTED, LED_FAST_BLINK_MS); // 2 fast blinks
+
+  lastRegNumber = regNumber;
   sendScanData(regNumber);
 }

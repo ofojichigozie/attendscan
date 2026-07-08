@@ -182,7 +182,7 @@ arduino-cli upload --fqbn esp32:esp32:esp32cam --port COM3 .
 ## Monitoring serial output
 
 ```bash
-arduino-cli monitor --port COM3 --config baudrate=9600
+arduino-cli monitor --port COM3 --config baudrate=115200
 ```
 
 Exit the monitor with `Ctrl+C`.

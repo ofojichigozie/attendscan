@@ -9,7 +9,7 @@
 // Server URLs
 // ---------------------------------------------------------------------------
 #define SERVER_URL_DEV  "http://192.168.0.170:3000/scan"
-#define SERVER_URL_PROD "https://attendanceapi-production-8964.up.railway.app/api/attendance/scan"
+#define SERVER_URL_PROD "https://attendance-api-k5dw.onrender.com/api/attendance/scan"
 
 #if USE_PRODUCTION
   #define SERVER_URL SERVER_URL_PROD
